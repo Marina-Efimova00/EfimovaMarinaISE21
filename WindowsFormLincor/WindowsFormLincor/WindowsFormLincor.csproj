@@ -60,6 +60,12 @@
     <Compile Include="FormLincor.Designer.cs">
       <DependentUpon>FormLincor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormLincorConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLincorConfig.Designer.cs">
+      <DependentUpon>FormLincorConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="ILincor.cs" />
     <Compile Include="Lincor.cs" />
     <Compile Include="MultiLevelDock.cs" />
@@ -72,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormLincor.resx">
       <DependentUpon>FormLincor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLincorConfig.resx">
+      <DependentUpon>FormLincorConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
