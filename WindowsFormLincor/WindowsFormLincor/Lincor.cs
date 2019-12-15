@@ -16,7 +16,7 @@ namespace WindowsFormLincor
         public int Weapons { private set; get; }
         ///Количество кругов  дыма
         public int Smoke { private set; get; }
-        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor): base(maxSpeed, weight, mainColor)
+        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor, LincorCount lincorCount) : base(maxSpeed, weight, mainColor, lincorCount)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
