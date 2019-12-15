@@ -23,6 +23,17 @@ namespace WindowsFormLincor
             MainColor = mainColor;
             DopColor = dopColor;
         }
+        public Lincor(string info) : base(info)
+        {
+            string[] strs = info.Split(';');
+            if (strs.Length == 4)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+            }
+        }
         public override void DrawLincor(Graphics g)
         {
             base.DrawLincor(g);
@@ -47,6 +58,10 @@ namespace WindowsFormLincor
          public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+        public override string ToString()
+        {
+            return base.ToString() + ";" + DopColor.Name;
         }
     }
 }
