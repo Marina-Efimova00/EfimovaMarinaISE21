@@ -12,11 +12,11 @@ namespace WindowsFormLincor
 {
     public partial class FormDock : Form
     {
-        Dock<ILincor> dock;
+        Dock<ILincor,ILincor> dock;
         public FormDock()
         {
             InitializeComponent();
-            dock = new Dock<ILincor>(20, pictureBoxDock.Width,pictureBoxDock.Height);
+            dock = new Dock<ILincor,ILincor>(20, pictureBoxDock.Width,pictureBoxDock.Height);
             Draw();
         }
         private void Draw()
