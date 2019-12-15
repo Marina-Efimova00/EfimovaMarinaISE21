@@ -52,7 +52,7 @@
             // 
             this.pictureBoxDock.Location = new System.Drawing.Point(3, 27);
             this.pictureBoxDock.Name = "pictureBoxDock";
-            this.pictureBoxDock.Size = new System.Drawing.Size(746, 470);
+            this.pictureBoxDock.Size = new System.Drawing.Size(783, 450);
             this.pictureBoxDock.TabIndex = 0;
             this.pictureBoxDock.TabStop = false;
             // 
@@ -62,7 +62,7 @@
             this.groupBoxLincor.Controls.Add(this.PickUp);
             this.groupBoxLincor.Controls.Add(this.maskedTextBoxPlace);
             this.groupBoxLincor.Controls.Add(this.Place);
-            this.groupBoxLincor.Location = new System.Drawing.Point(755, 258);
+            this.groupBoxLincor.Location = new System.Drawing.Point(792, 258);
             this.groupBoxLincor.Name = "groupBoxLincor";
             this.groupBoxLincor.Size = new System.Drawing.Size(147, 219);
             this.groupBoxLincor.TabIndex = 3;
@@ -106,7 +106,7 @@
             // listBoxLevels
             // 
             this.listBoxLevels.FormattingEnabled = true;
-            this.listBoxLevels.Location = new System.Drawing.Point(771, 11);
+            this.listBoxLevels.Location = new System.Drawing.Point(809, 12);
             this.listBoxLevels.Name = "listBoxLevels";
             this.listBoxLevels.Size = new System.Drawing.Size(110, 82);
             this.listBoxLevels.TabIndex = 4;
@@ -114,7 +114,7 @@
             // 
             // buttonSetLincor
             // 
-            this.buttonSetLincor.Location = new System.Drawing.Point(775, 139);
+            this.buttonSetLincor.Location = new System.Drawing.Point(813, 141);
             this.buttonSetLincor.Name = "buttonSetLincor";
             this.buttonSetLincor.Size = new System.Drawing.Size(106, 47);
             this.buttonSetLincor.TabIndex = 5;
@@ -128,7 +128,7 @@
             this.файлToolStripMenuItem});
             this.menuStripFile.Location = new System.Drawing.Point(0, 0);
             this.menuStripFile.Name = "menuStripFile";
-            this.menuStripFile.Size = new System.Drawing.Size(907, 24);
+            this.menuStripFile.Size = new System.Drawing.Size(951, 24);
             this.menuStripFile.TabIndex = 6;
             this.menuStripFile.Text = "menuStrip";
             // 
@@ -163,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(907, 489);
+            this.ClientSize = new System.Drawing.Size(951, 489);
             this.Controls.Add(this.buttonSetLincor);
             this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.groupBoxLincor);
