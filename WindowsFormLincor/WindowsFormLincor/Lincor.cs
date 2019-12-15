@@ -19,18 +19,20 @@ namespace WindowsFormLincor
         public float Weight { private set; get; }
         public Color MainColor { private set; get; }
         public Color DopColor { private set; get; }
+        public DrawTool.LincorCount Count { private get; set; }
         /// Количество иллюменаторов 
         public int CountWindow { private set; get; }
         ///Количество орудий 
         public int Weapons { private set; get; }
         ///Количество кругов  дыма
         public int Smoke { private set; get; }
-        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor)
+        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor, DrawTool.LincorCount lincorCount)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
             DopColor = dopColor;
+            Count = lincorCount;
         }
         public void SetPosition(int x, int y, int width, int height)
         {
@@ -72,6 +74,8 @@ namespace WindowsFormLincor
         }
         public void DrawLincor(Graphics g)
         {
+            DrawTool dt = new DrawTool(Count, MainColor, DopColor, (int)_startPosX, (int)_startPosY);
+            dt.DrawLin(g);
             SolidBrush blueBrush = new SolidBrush(MainColor);
             Point point1 = new Point((int)_startPosX + 10, (int)_startPosY + 35);
             Point point2 = new Point((int)_startPosX + 110, (int)_startPosY + 35);
@@ -84,12 +88,8 @@ namespace WindowsFormLincor
             g.FillRectangle(blueBrush1, _startPosX + 30, _startPosY + 15, 10, 20);
             Pen pen = new Pen(MainColor);
             g.DrawRectangle(pen, _startPosX + 30, _startPosY + 15, 10, 20);
-            Pen greenPen = new Pen(Color.Black, 2);
+            Pen greenPen = new Pen(Color.FromArgb(255, 13, 99, 0), 2);
             SolidBrush blueBrush2 = new SolidBrush(Color.DarkGreen);
-            g.FillRectangle(blueBrush2, _startPosX + 60, _startPosY + 27, 10, 8);
-            g.DrawLine(greenPen, _startPosX + 68, _startPosY + 28, _startPosX + 77, _startPosY + 22);
-            g.FillRectangle(blueBrush2, _startPosX + 75, _startPosY + 27, 10, 8);
-            g.DrawLine(greenPen, _startPosX + 83, _startPosY + 28, _startPosX + 90, _startPosY + 22);
             SolidBrush blueBrush3 = new SolidBrush(Color.White);
             g.FillEllipse(blueBrush3, _startPosX + 20, _startPosY + 37, 5, 5);
             g.FillEllipse(blueBrush3, _startPosX + 35, _startPosY + 37, 5, 5);
@@ -99,7 +99,7 @@ namespace WindowsFormLincor
             g.FillRectangle(blueBrush1, _startPosX + 40, _startPosY + 20, 5, 15);
             g.DrawRectangle(pen, _startPosX + 25, _startPosY + 25, 5, 10);
             g.DrawRectangle(pen, _startPosX + 40, _startPosY + 20, 5, 15);
-            Pen pen1 = new Pen(Color.Gray, 3);
+            Pen pen1 = new Pen(Color.FromArgb(255, 194, 196, 196), 3);
             g.DrawEllipse(pen1, _startPosX + 30, _startPosY + 6, 7, 7);
             g.DrawEllipse(pen1, _startPosX + 20, _startPosY + 5, 5, 5);
             g.DrawEllipse(pen1, _startPosX + 10, _startPosY + 4, 5, 5);
