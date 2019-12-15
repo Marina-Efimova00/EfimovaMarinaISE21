@@ -7,17 +7,8 @@ using System.Threading.Tasks;
 
 namespace WindowsFormLincor
 {
-    class Lincor
+    class Lincor : WarShip
     {
-        private float _startPosX;
-        private float _startPosY;
-        private int _pictureWidth;
-        private int _pictureHeight;
-        private const int linWidth = 100;
-        private const int linHeight = 60;
-        public int MaxSpeed { private set; get; }
-        public float Weight { private set; get; }
-        public Color MainColor { private set; get; }
         public Color DopColor { private set; get; }
         /// Количество иллюменаторов 
         public int CountWindow { private set; get; }
@@ -25,85 +16,33 @@ namespace WindowsFormLincor
         public int Weapons { private set; get; }
         ///Количество кругов  дыма
         public int Smoke { private set; get; }
-        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor)
+        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor): base(maxSpeed, weight, mainColor)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
             DopColor = dopColor;
         }
-        public void SetPosition(int x, int y, int width, int height)
+        public override void DrawLincor(Graphics g)
         {
-            _startPosX = x;
-            _startPosY = y;
-            _pictureWidth = width;
-            _pictureHeight = height;
-        }
-        public void MoveTransport(Direction direction)
-        {
-            float step = MaxSpeed * 100 / Weight;
-            switch (direction)
-            {
-                case Direction.Right:
-                    if (_startPosX + step < _pictureWidth - linWidth)
-                    {
-                        _startPosX += step;
-                    }
-                    break;
-                case Direction.Left:
-                    if (_startPosX - step > 0)
-                    {
-                        _startPosX -= step;
-                    }
-                    break;
-                case Direction.Up:
-                    if (_startPosY - step > 0)
-                    {
-                        _startPosY -= step;
-                    }
-                    break;
-                case Direction.Down:
-                    if (_startPosY + step < _pictureHeight - linHeight)
-                    {
-                        _startPosY += step;
-                    }
-                    break;
-            }
-        }
-        public void DrawLincor(Graphics g)
-        {
-            SolidBrush blueBrush = new SolidBrush(MainColor);
-            Point point1 = new Point((int)_startPosX + 10, (int)_startPosY + 35);
-            Point point2 = new Point((int)_startPosX + 110, (int)_startPosY + 35);
-            Point point3 = new Point((int)_startPosX + 100, (int)_startPosY + 50);
-            Point point4 = new Point((int)_startPosX + 20, (int)_startPosY + 50);
-            Point point5 = new Point((int)_startPosX + 10, (int)_startPosY + 35);
-            Point[] curvePoint = { point1, point2, point3, point4, point5 };
-            g.FillPolygon(blueBrush, curvePoint);
+            base.DrawLincor(g);
             SolidBrush blueBrush1 = new SolidBrush(Color.Green);
-            g.FillRectangle(blueBrush1, _startPosX + 30, _startPosY + 15, 10, 20);
+            g.FillRectangle(blueBrush1, _startPosX + 25, _startPosY + 25, 5, 10);
+            g.FillRectangle(blueBrush1, _startPosX + 40, _startPosY + 20, 5, 15);
             Pen pen = new Pen(MainColor);
-            g.DrawRectangle(pen, _startPosX + 30, _startPosY + 15, 10, 20);
+            g.DrawRectangle(pen, _startPosX + 25, _startPosY + 25, 5, 10);
+            g.DrawRectangle(pen, _startPosX + 40, _startPosY + 20, 5, 15);
+            Pen pen1 = new Pen(Color.FromArgb(255, 194, 196, 196), 3);
+            g.DrawEllipse(pen1, _startPosX + 30, _startPosY + 6, 7, 7);
+            g.DrawEllipse(pen1, _startPosX + 20, _startPosY + 5, 5, 5);
+            g.DrawEllipse(pen1, _startPosX + 10, _startPosY + 4, 5, 5);
+            g.DrawEllipse(pen1, _startPosX, _startPosY, 5, 5);
             Pen greenPen = new Pen(Color.Black, 2);
             SolidBrush blueBrush2 = new SolidBrush(Color.DarkGreen);
             g.FillRectangle(blueBrush2, _startPosX + 60, _startPosY + 27, 10, 8);
             g.DrawLine(greenPen, _startPosX + 68, _startPosY + 28, _startPosX + 77, _startPosY + 22);
             g.FillRectangle(blueBrush2, _startPosX + 75, _startPosY + 27, 10, 8);
             g.DrawLine(greenPen, _startPosX + 83, _startPosY + 28, _startPosX + 90, _startPosY + 22);
-            SolidBrush blueBrush3 = new SolidBrush(Color.White);
-            g.FillEllipse(blueBrush3, _startPosX + 20, _startPosY + 37, 5, 5);
-            g.FillEllipse(blueBrush3, _startPosX + 35, _startPosY + 37, 5, 5);
-            g.FillEllipse(blueBrush3, _startPosX + 55, _startPosY + 37, 5, 5);
-            g.FillEllipse(blueBrush3, _startPosX + 70, _startPosY + 37, 5, 5);
-            g.FillRectangle(blueBrush1, _startPosX + 25, _startPosY + 25, 5, 10);
-            g.FillRectangle(blueBrush1, _startPosX + 40, _startPosY + 20, 5, 15);
-            g.DrawRectangle(pen, _startPosX + 25, _startPosY + 25, 5, 10);
-            g.DrawRectangle(pen, _startPosX + 40, _startPosY + 20, 5, 15);
-            Pen pen1 = new Pen(Color.Gray, 3);
-            g.DrawEllipse(pen1, _startPosX + 30, _startPosY + 6, 7, 7);
-            g.DrawEllipse(pen1, _startPosX + 20, _startPosY + 5, 5, 5);
-            g.DrawEllipse(pen1, _startPosX + 10, _startPosY + 4, 5, 5);
-            g.DrawEllipse(pen1, _startPosX, _startPosY, 5, 5);
         }
     }
 }

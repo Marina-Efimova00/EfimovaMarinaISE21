@@ -34,6 +34,7 @@
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
+            this.CreateWarShip = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLincor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,11 +100,22 @@
             this.buttonUp.UseVisualStyleBackColor = true;
             this.buttonUp.Click += new System.EventHandler(this.buttonMove_Click);
             // 
+            // CreateWarShip
+            // 
+            this.CreateWarShip.Location = new System.Drawing.Point(196, 19);
+            this.CreateWarShip.Name = "CreateWarShip";
+            this.CreateWarShip.Size = new System.Drawing.Size(180, 26);
+            this.CreateWarShip.TabIndex = 6;
+            this.CreateWarShip.Text = "Создать военный корабль";
+            this.CreateWarShip.UseVisualStyleBackColor = true;
+            this.CreateWarShip.Click += new System.EventHandler(this.buttonCreateWarShip_Click);
+            // 
             // FormLincor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 500);
+            this.Controls.Add(this.CreateWarShip);
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonDown);
@@ -125,6 +137,7 @@
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonUp;
+        private System.Windows.Forms.Button CreateWarShip;
     }
 }
 
