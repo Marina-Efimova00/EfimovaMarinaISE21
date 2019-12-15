@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormLincor
 {
-    interface ILincor
+    public interface ILincor
     {
         void SetPosition(int x, int y, int width, int height);
         void MoveTransport(Direction direction);
