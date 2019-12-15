@@ -6,11 +6,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormLincor
 {
+    public delegate void linDelegate(ILincor lin);
     static class Program
     {
-        /// <summary>
-        /// Главная точка входа для приложения.
-        /// </summary>
         [STAThread]
         static void Main()
         {

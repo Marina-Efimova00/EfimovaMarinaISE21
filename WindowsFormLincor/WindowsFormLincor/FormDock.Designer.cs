@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.pictureBoxDock = new System.Windows.Forms.PictureBox();
-            this.ParkLincor = new System.Windows.Forms.Button();
-            this.ParkWarShip = new System.Windows.Forms.Button();
             this.groupBoxLincor = new System.Windows.Forms.GroupBox();
             this.pictureBoxTakeLincor = new System.Windows.Forms.PictureBox();
             this.PickUp = new System.Windows.Forms.Button();
             this.maskedTextBoxPlace = new System.Windows.Forms.MaskedTextBox();
             this.Place = new System.Windows.Forms.Label();
             this.listBoxLevels = new System.Windows.Forms.ListBox();
+            this.buttonSetLincor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDock)).BeginInit();
             this.groupBoxLincor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeLincor)).BeginInit();
@@ -49,26 +48,6 @@
             this.pictureBoxDock.Size = new System.Drawing.Size(746, 494);
             this.pictureBoxDock.TabIndex = 0;
             this.pictureBoxDock.TabStop = false;
-            // 
-            // ParkLincor
-            // 
-            this.ParkLincor.Location = new System.Drawing.Point(771, 116);
-            this.ParkLincor.Name = "ParkLincor";
-            this.ParkLincor.Size = new System.Drawing.Size(111, 47);
-            this.ParkLincor.TabIndex = 1;
-            this.ParkLincor.Text = "Припарковать линкор";
-            this.ParkLincor.UseVisualStyleBackColor = true;
-            this.ParkLincor.Click += new System.EventHandler(this.buttonSetLincor_Click);
-            // 
-            // ParkWarShip
-            // 
-            this.ParkWarShip.Location = new System.Drawing.Point(771, 188);
-            this.ParkWarShip.Name = "ParkWarShip";
-            this.ParkWarShip.Size = new System.Drawing.Size(111, 48);
-            this.ParkWarShip.TabIndex = 2;
-            this.ParkWarShip.Text = "Припарковать военный корабль";
-            this.ParkWarShip.UseVisualStyleBackColor = true;
-            this.ParkWarShip.Click += new System.EventHandler(this.buttonSetWarShip_Click);
             // 
             // groupBoxLincor
             // 
@@ -126,15 +105,24 @@
             this.listBoxLevels.TabIndex = 4;
             this.listBoxLevels.Click += new System.EventHandler(this.listBoxLevels_SelectedIndexChanged);
             // 
+            // buttonSetLincor
+            // 
+            this.buttonSetLincor.Location = new System.Drawing.Point(775, 139);
+            this.buttonSetLincor.Name = "buttonSetLincor";
+            this.buttonSetLincor.Size = new System.Drawing.Size(106, 47);
+            this.buttonSetLincor.TabIndex = 5;
+            this.buttonSetLincor.Text = "Заказать линкор";
+            this.buttonSetLincor.UseVisualStyleBackColor = true;
+            this.buttonSetLincor.Click += new System.EventHandler(this.buttonSetLincor_Click);
+            // 
             // FormDock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(907, 489);
+            this.Controls.Add(this.buttonSetLincor);
             this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.groupBoxLincor);
-            this.Controls.Add(this.ParkWarShip);
-            this.Controls.Add(this.ParkLincor);
             this.Controls.Add(this.pictureBoxDock);
             this.Name = "FormDock";
             this.Text = "FormDock";
@@ -149,13 +137,12 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxDock;
-        private System.Windows.Forms.Button ParkLincor;
-        private System.Windows.Forms.Button ParkWarShip;
         private System.Windows.Forms.GroupBox groupBoxLincor;
         private System.Windows.Forms.PictureBox pictureBoxTakeLincor;
         private System.Windows.Forms.Button PickUp;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxPlace;
         private System.Windows.Forms.Label Place;
         private System.Windows.Forms.ListBox listBoxLevels;
+        private System.Windows.Forms.Button buttonSetLincor;
     }
 }

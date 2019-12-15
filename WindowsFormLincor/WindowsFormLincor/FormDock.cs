@@ -13,6 +13,7 @@ namespace WindowsFormLincor
     public partial class FormDock : Form
     {
         MultiLevelDock dock;
+        FormLincorConfig form;
         private const int countLevel = 5;
         public FormDock()
         {
@@ -32,43 +33,6 @@ namespace WindowsFormLincor
                 Graphics gr = Graphics.FromImage(bmp);
                 dock[listBoxLevels.SelectedIndex].Draw(gr);
                 pictureBoxDock.Image = bmp;
-            }
-        }
-        private void buttonSetLincor_Click(object sender, EventArgs e)
-        {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                var lin = new Lincor(100, 1000, dialog.Color, Color.Gray);
-                int place = dock[listBoxLevels.SelectedIndex] + lin;
-                if (place == -1)
-                {
-                    MessageBox.Show("Нет свободных мест", "Ошибка",
-                   MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                Draw();
-            }
-        }
-        private void buttonSetWarShip_Click(object sender, EventArgs e)
-        {
-            if (listBoxLevels.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var lin = new WarShip(100, 1000, dialog.Color);
-                        int place = dock[listBoxLevels.SelectedIndex] + lin;
-                        if (place == -1)
-                        {
-                            MessageBox.Show("Нет свободных мест", "Ошибка",
-                           MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        Draw();
-                    }
-                }
             }
         }
         private void buttonTakeLincor_Click(object sender, EventArgs e)
@@ -100,6 +64,27 @@ namespace WindowsFormLincor
         private void listBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+        private void buttonSetLincor_Click(object sender, EventArgs e)
+        {
+            form = new FormLincorConfig();
+            form.AddEvent(AddLincor);
+            form.Show();
+        }
+        private void AddLincor(ILincor lin)
+        {
+            if (lin != null && listBoxLevels.SelectedIndex > -1)
+            {
+                int place = dock[listBoxLevels.SelectedIndex] + lin;
+                if (place > -1)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Линкор не удалось поставить");
+                }
+            }
         }
     }
 }

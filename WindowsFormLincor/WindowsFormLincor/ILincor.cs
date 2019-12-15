@@ -12,5 +12,6 @@ namespace WindowsFormLincor
         void SetPosition(int x, int y, int width, int height);
         void MoveTransport(Direction direction);
         void DrawLincor(Graphics g);
+        void SetMainColor(Color color);
     }
 }
