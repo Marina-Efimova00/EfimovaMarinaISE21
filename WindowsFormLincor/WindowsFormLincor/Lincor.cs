@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormLincor
 {
-    class Lincor : WarShip
+    class Lincor : WarShip, IComparable<Lincor>, IEquatable<Lincor>
     {
         public Color DopColor { private set; get; }
         /// Количество иллюменаторов 
@@ -62,6 +62,54 @@ namespace WindowsFormLincor
         public override string ToString()
         {
             return base.ToString() + ";" + DopColor.Name;
+        }
+        public int CompareTo(Lincor other)
+        {
+            var res = (this is WarShip).CompareTo(other is WarShip);
+            if (res != 0)
+            {
+                return res;
+            }
+            if (DopColor != other.DopColor)
+            {
+                DopColor.Name.CompareTo(other.DopColor.Name);
+            }
+            return 0;
+        }        public bool Equals(Lincor other)
+        {
+            var res = (this as WarShip).Equals(other as Lincor); 
+            if (!res)
+            {
+                return res;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is WarShip linObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(linObj);
+            }
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
