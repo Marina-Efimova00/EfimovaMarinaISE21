@@ -125,5 +125,9 @@ namespace WindowsFormLincor
                 return true;
             }
         }
+        public void Sort()
+        {
+            dockStages.Sort();
+        }
     }
 }
