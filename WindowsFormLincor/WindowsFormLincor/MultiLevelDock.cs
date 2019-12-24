@@ -49,19 +49,23 @@ namespace WindowsFormLincor
                     sw.WriteLine("Level");
                     for (int i = 0; i < countPlaces; i++)
                     {
-                        var lin = level[i];
-                        if (lin != null)
+                        try
                         {
-                            if (lin.GetType().Name == "Lincor")
+                            var lin = level[i];
+                            if (lin != null)
                             {
-                                sw.Write(i + ":Lincor:");
+                                if (lin.GetType().Name == "Lincor")
+                                {
+                                    sw.Write(i + ":Lincor:");
+                                }
+                                if (lin.GetType().Name == "WarShip")
+                                {
+                                    sw.Write(i + ":WarShip:");
+                                }
+                                sw.WriteLine(lin + Environment.NewLine);
                             }
-                            if (lin.GetType().Name == "WarShip")
-                            {
-                                sw.Write(i + ":WarShip:");
-                            }
-                            sw.WriteLine(lin);
                         }
+                        finally { }
                     }
                 }
             }
@@ -71,7 +75,7 @@ namespace WindowsFormLincor
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             int counter = -1;
             ILincor lin = null;
@@ -89,7 +93,7 @@ namespace WindowsFormLincor
                 }
                 else
                 {
-                    return false;
+                    throw new Exception("Неверный формат файла");
                 }
 
                 while ((str = sr.ReadLine()) != null)

@@ -26,7 +26,7 @@ namespace WindowsFormLincor
         {
             if (p._places.Count == p._maxCount)
             {
-                return -1;
+                throw new DockOverflowException();
             }
             for (int i = 0; i < p._maxCount; i++)
             {
@@ -49,7 +49,7 @@ namespace WindowsFormLincor
                 p._places.Remove(index);
                 return lin;
             }
-            return null;
+            throw new DockNotFoundException(index);
         }
         private bool CheckFreePlace(int index)
         {
@@ -95,6 +95,10 @@ namespace WindowsFormLincor
                     _places.Add(ind, value);
                     _places[ind].SetPosition(5 + ind / 5 * _placeSizeWidth + 5, ind % 5
                     * _placeSizeHeight + 15, PictureWidth, PictureHeight);
+                }
+                else
+                {
+                    throw new DockOccupiedPlaceException(ind);
                 }
             }
         }

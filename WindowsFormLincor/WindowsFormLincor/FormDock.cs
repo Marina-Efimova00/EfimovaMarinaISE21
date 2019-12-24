@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NLog;
 
 namespace WindowsFormLincor
 {
@@ -15,9 +16,11 @@ namespace WindowsFormLincor
         MultiLevelDock dock;
         FormLincorConfig form;
         private const int countLevel = 5;
+        private Logger logger;
         public FormDock()
         {
             InitializeComponent();
+            logger = LogManager.GetCurrentClassLogger();
             dock = new MultiLevelDock(countLevel, pictureBoxDock.Width, pictureBoxDock.Height);
             for (int i = 0; i < countLevel; i++)
             {
@@ -41,9 +44,9 @@ namespace WindowsFormLincor
             {
                 if (maskedTextBoxPlace.Text != "")
                 {
-                    var lin = dock[listBoxLevels.SelectedIndex] - Convert.ToInt32(maskedTextBoxPlace.Text);
-                    if (lin != null)
+                    try
                     {
+                        var lin = dock[listBoxLevels.SelectedIndex] - Convert.ToInt32(maskedTextBoxPlace.Text);
                         Bitmap bmp = new Bitmap(pictureBoxTakeLincor.Width,
                        pictureBoxTakeLincor.Height);
                         Graphics gr = Graphics.FromImage(bmp);
@@ -51,13 +54,24 @@ namespace WindowsFormLincor
                        pictureBoxTakeLincor.Height);
                         lin.DrawLincor(gr);
                         pictureBoxTakeLincor.Image = bmp;
+                        logger.Info("Изъят линкор " + lin.ToString() + " с места " + maskedTextBoxPlace.Text);
+                        Draw();
                     }
-                    else
+                    catch (DockNotFoundException ex)
                     {
-                        Bitmap bmp = new Bitmap(pictureBoxTakeLincor.Width, pictureBoxTakeLincor.Height);
+                        MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,
+                       MessageBoxIcon.Error);
+                        Bitmap bmp = new Bitmap(pictureBoxTakeLincor.Width,
+                       pictureBoxTakeLincor.Height);
                         pictureBoxTakeLincor.Image = bmp;
+                        logger.Error("Не найдено");
                     }
-                    Draw();
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        logger.Error("Не изветсно");
+                    }
                 }
             }
         }
@@ -75,14 +89,23 @@ namespace WindowsFormLincor
         {
             if (lin != null && listBoxLevels.SelectedIndex > -1)
             {
-                int place = dock[listBoxLevels.SelectedIndex] + lin;
-                if (place > -1)
+                try
                 {
+                    int place = dock[listBoxLevels.SelectedIndex] + lin;
+                    logger.Info("Добавлен линкор " + lin.ToString() + " на место " + place);
                     Draw();
                 }
-                else
+                catch (DockOverflowException ex)
                 {
-                    MessageBox.Show("Линкор не удалось поставить");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                    logger.Error("Переполнение");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Error("Неизвестная ошибка");
                 }
             }
         }
@@ -90,15 +113,18 @@ namespace WindowsFormLincor
         {
             if (saveFileDialogLevel.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (dock.SaveData(saveFileDialogLevel.FileName))
+                try
                 {
+                    dock.SaveData(saveFileDialogLevel.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialogLevel.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Error("Неизвестная ошибка при сохранении");
                 }
             }
         }
@@ -106,16 +132,24 @@ namespace WindowsFormLincor
         {
             if (openFileDialogLevel.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (dock.LoadData(openFileDialogLevel.FileName))
+                try
                 {
-
+                    dock.LoadData(openFileDialogLevel.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
     MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialogLevel.FileName);
                 }
-                else
+                catch (DockOccupiedPlaceException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
+                    logger.Error("Занятое место");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Error("Неизвестная ошибка при сохранении");
                 }
                 Draw();
             }
