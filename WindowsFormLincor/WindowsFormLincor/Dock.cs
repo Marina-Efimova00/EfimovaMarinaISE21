@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace WindowsFormLincor
 {
-    public class Dock<T> where T : class, ILincor
+    public class Dock<T> : IEnumerator<T>, IEnumerable<T>, IComparable<Dock<T>>
+        where T : class, ILincor
     {
         private Dictionary<int, T> _places;
         private int _maxCount;
@@ -15,18 +17,31 @@ namespace WindowsFormLincor
         private const int _placeSizeWidth = 210;
         private int PictureHeight { get; set; }
         private const int _placeSizeHeight = 80;
+        private int _currentIndex;
+        public int GetKey
+        {
+            get
+            {
+                return _places.Keys.ToList()[_currentIndex];
+            }
+        }
         public Dock(int sizes, int pictureWidth, int pictureHeight)
         {
             _maxCount = sizes;
             _places = new Dictionary<int, T>();
             PictureWidth = pictureWidth;
             PictureHeight = pictureHeight;
+            _currentIndex = -1;
         }
         public static int operator +(Dock<T> p, T lin)
         {
             if (p._places.Count == p._maxCount)
             {
                 throw new DockOverflowException();
+            }
+            if (p._places.ContainsValue(lin))
+            {
+                throw new DockAlreadyHaveException();
             }
             for (int i = 0; i < p._maxCount; i++)
             {
@@ -59,9 +74,9 @@ namespace WindowsFormLincor
         {
             DrawMarking(g);
             var keys = _places.Keys.ToList();
-            for (int i = 0; i < keys.Count; i++)
+            foreach (var lin in _places)
             {
-                _places[keys[i]].DrawLincor(g);
+                lin.Value.DrawLincor(g);
             }
         }
         private void DrawMarking(Graphics g)
@@ -101,6 +116,88 @@ namespace WindowsFormLincor
                     throw new DockOccupiedPlaceException(ind);
                 }
             }
+        }
+        public T Current
+        {
+            get
+            {
+                return _places[_places.Keys.ToList()[_currentIndex]];
+            }
+        }
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+        public void Dispose()
+        {
+            _places.Clear();
+        }
+        public bool MoveNext()
+        {
+            if (_currentIndex + 1 >= _places.Count)
+            {
+                Reset();
+                return false;
+            }
+            _currentIndex++;
+            return true;
+        }
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+        public int CompareTo(Dock<T> other)
+        {
+            if (_places.Count > other._places.Count)
+            {
+                return -1;
+            }
+            else if (_places.Count < other._places.Count)
+            {
+                return 1;
+            }
+            else if (_places.Count > 0)
+            {
+                var thisKeys = _places.Keys.ToList();
+                var otherKeys = other._places.Keys.ToList();
+                for (int i = 0; i < _places.Count; ++i)
+                {
+                    if (_places[thisKeys[i]] is WarShip && other._places[thisKeys[i]] is
+                   Lincor)
+                    {
+                        return 1;
+                    }
+                    if (_places[thisKeys[i]] is Lincor && other._places[thisKeys[i]]
+                    is WarShip)
+                    {
+                        return -1;
+                    }
+                    if (_places[thisKeys[i]] is WarShip && other._places[thisKeys[i]] is
+                    WarShip)
+                    {
+                        return (_places[thisKeys[i]] is
+                       WarShip).CompareTo(other._places[thisKeys[i]] is WarShip);
+                    }
+                    if (_places[thisKeys[i]] is Lincor && other._places[thisKeys[i]]
+                    is Lincor)
+                    {
+                        return (_places[thisKeys[i]] is
+                       Lincor).CompareTo(other._places[thisKeys[i]] is Lincor);
+                    }
+                }
+            }
+            return 0;
         }
     }
 }
