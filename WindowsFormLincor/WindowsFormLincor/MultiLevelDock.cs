@@ -11,7 +11,8 @@ namespace WindowsFormLincor
     {
         List<Dock<ILincor>> dockStages;
         private const int countPlaces = 20;
-        private int pictureWidth;        private int pictureHeight;
+        private int pictureHeight;
+        private int pictureWidth;
         public MultiLevelDock(int countStages, int pictureWidth, int pictureHeight)
         {
             dockStages = new List<Dock<ILincor>>();
