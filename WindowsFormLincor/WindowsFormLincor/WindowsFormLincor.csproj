@@ -47,9 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Direction.cs" />
-    <Compile Include="DrawTool.cs" />
-    <Compile Include="DrawTool2.cs" />
-    <Compile Include="DrawTool3.cs" />
+    <Compile Include="DrawToolSquare.cs" />
+    <Compile Include="DrawToolCircle.cs" />
+    <Compile Include="DrawToolRectangle.cs" />
     <Compile Include="FormLincor.cs">
       <SubType>Form</SubType>
     </Compile>

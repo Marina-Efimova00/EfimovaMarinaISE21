@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace WindowsFormLincor
 {
-    class DrawTool3 : ITool
+    class DrawToolRectangle : ITool
     {
         public LincorCount Count { private set; get; }
         public Color MainColor { private set; get; }
         public Color DopColor { private set; get; }
         public int x;
         public int y;
-        public DrawTool3(LincorCount linCount, Color mainColor, Color dopColor, int posX, int posY)
+        public DrawToolRectangle(LincorCount linCount, Color mainColor, Color dopColor, int posX, int posY)
         {
             MainColor = mainColor;
             DopColor = dopColor;

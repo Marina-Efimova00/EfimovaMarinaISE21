@@ -77,16 +77,16 @@ namespace WindowsFormLincor
             switch (toolType)
             {
                 case 0:
-                    dt = new DrawTool(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    dt = new DrawToolSquare(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
                     break;
                 case 1:
-                    dt = new DrawTool2(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    dt = new DrawToolCircle(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
                     break;
                 case 2:
-                    dt = new DrawTool3(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    dt = new DrawToolRectangle(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
                     break;
                 default:
-                    dt = new DrawTool3(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    dt = new DrawToolRectangle(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
                     break;
             }
             dt.DrawLin(g);
