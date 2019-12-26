@@ -10,7 +10,7 @@ namespace WindowsFormLincor
     public class MultiLevelDock
     {
         List<Dock<ILincor>> dockStages;
-        private const int countPlaces = 20;
+        public const int countPlaces = 20;
         private int pictureHeight;
         private int pictureWidth;
         public MultiLevelDock(int countStages, int pictureWidth, int pictureHeight)
@@ -91,7 +91,6 @@ namespace WindowsFormLincor
                 {
                     return false;
                 }
-
                 while ((str = sr.ReadLine()) != null)
                 {
                     if (str == "Level")
@@ -121,6 +120,79 @@ namespace WindowsFormLincor
                 }
                 return true;
             }
+        }
+        public bool SaveLevelData(string filename, int selectedLevel)
+        {
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+            using (StreamWriter sw = new StreamWriter(filename))
+            {
+                sw.WriteLine("Level");
+
+                for (int i = 0; i < countPlaces; i++)
+                {
+                    var lin = dockStages[selectedLevel][i];
+                    if (lin != null)
+                    {
+                        if (lin.GetType().Name == "Lincor")
+                        {
+                            sw.Write(i + ":Lincor:");
+                        }
+                        if (lin.GetType().Name == "WarShip")
+                        {
+                            sw.Write(i + ":WarShip:");
+                        }
+                        sw.WriteLine(lin);
+                    }
+                }
+                sw.WriteLine("Level");
+            }
+            return true;
+        }
+        public bool LoadLevelData(string filename, int selectedLevel)
+        {
+            if (!File.Exists(filename))
+            {
+                return false;
+            }
+            using (StreamReader sr = new StreamReader(filename))
+            {
+                var strs = sr.ReadLine();
+                if (strs.Contains("Level"))
+                {
+                    int counter = -1;
+                    ILincor lin = null;
+                    while (counter < 1)
+                    {
+                        strs = sr.ReadLine();
+                        if (strs == "Level")
+                        {
+                            counter++;
+                            continue;
+                        }
+                        if (string.IsNullOrEmpty(strs))
+                        {
+                            break;
+                        }
+                        if (strs.Split(':')[1] == "Lincor")
+                        {
+                            lin = new Lincor(strs.Split(':')[2]);
+                        }
+                        else if (strs.Split(':')[1] == "WarShip")
+                        {
+                            lin = new WarShip(strs.Split(':')[2]);
+                        }
+                        dockStages[selectedLevel][Convert.ToInt32(strs.Split(':')[0])] = lin;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
