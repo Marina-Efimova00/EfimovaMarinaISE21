@@ -16,12 +16,16 @@ namespace WindowsFormLincor
         public int Weapons { private set; get; }
         ///Количество кругов  дыма
         public int Smoke { private set; get; }
-        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor): base(maxSpeed, weight, mainColor)
+        public LincorCount Count { private set; get; }
+        private int lincorType;
+        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor, LincorCount lincorCount) : base(maxSpeed, weight, mainColor)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
             DopColor = dopColor;
+            Count = lincorCount;
+            lincorType = new Random().Next(3);
         }
         public override void DrawLincor(Graphics g)
         {
@@ -39,14 +43,33 @@ namespace WindowsFormLincor
             g.DrawEllipse(pen1, _startPosX, _startPosY, 5, 5);
             Pen greenPen = new Pen(Color.Black, 2);
             SolidBrush blueBrush2 = new SolidBrush(DopColor);
-            g.FillRectangle(blueBrush2, _startPosX + 60, _startPosY + 27, 10, 8);
             g.DrawLine(greenPen, _startPosX + 68, _startPosY + 28, _startPosX + 77, _startPosY + 22);
-            g.FillRectangle(blueBrush2, _startPosX + 75, _startPosY + 27, 10, 8);
             g.DrawLine(greenPen, _startPosX + 83, _startPosY + 28, _startPosX + 90, _startPosY + 22);
+            ITool dt;
+            switch (lincorType)
+            {
+                case 0:
+                    dt = new DrawToolSquare(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    break;
+                case 1:
+                    dt = new DrawToolCircle(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    break;
+                case 2:
+                    dt = new DrawToolRectangle(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    break;
+                default:
+                    dt = new DrawToolRectangle(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    break;
+            }
+            dt.DrawLin(g);
         }
          public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+        public void SetLincorType(int type)
+        {
+            lincorType = type;
         }
     }
 }

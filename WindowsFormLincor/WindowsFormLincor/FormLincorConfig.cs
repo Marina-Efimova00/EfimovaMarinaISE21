@@ -75,10 +75,28 @@ namespace WindowsFormLincor
             switch (e.Data.GetData(DataFormats.Text).ToString())
             {
                 case "Линкор":
-                    lin = new Lincor(100, 500, Color.Green, Color.Blue);
+                    lin = new Lincor(100, 500, Color.Green, Color.Blue, LincorCount.TWO);
                     break;
                 case "Военный корабль":
                     lin = new WarShip(100, 500, Color.Black);
+                    break;
+                case "DrawToolSquare":
+                    if (lin is Lincor)
+                    {
+                        (lin as Lincor).SetLincorType(0);
+                    }
+                    break;
+                case "DrawToolCircle":
+                    if (lin is Lincor)
+                    {
+                        (lin as Lincor).SetLincorType(1);
+                    }
+                    break;
+                case "DrawToolRectangle":
+                    if (lin is Lincor)
+                    {
+                        (lin as Lincor).SetLincorType(2);
+                    }
                     break;
             }
             DrawLincor();
@@ -121,6 +139,23 @@ DragDropEffects.Move | DragDropEffects.Copy);
         {
             eventAddLincor?.Invoke(lin);
             Close();
+        }
+        private void labelDrawToolSquare_MouseDown(object sender, MouseEventArgs e)
+        {
+            labelWarShip.DoDragDrop(labelDrawToolSquare.Text,
+                DragDropEffects.Move | DragDropEffects.Copy);
+        }
+
+        private void labelDrawToolCircle_MouseDown(object sender, MouseEventArgs e)
+        {
+            labelWarShip.DoDragDrop(labelDrawToolCircle.Text,
+                DragDropEffects.Move | DragDropEffects.Copy);
+        }
+
+        private void labelDrawToolRectangle_MouseDown(object sender, MouseEventArgs e)
+        {
+            labelWarShip.DoDragDrop(labelDrawToolRectangle.Text,
+                DragDropEffects.Move | DragDropEffects.Copy);
         }
     }
 }
