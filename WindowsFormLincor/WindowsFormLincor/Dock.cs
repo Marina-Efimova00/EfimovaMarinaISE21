@@ -19,7 +19,7 @@ namespace WindowsFormLincor
         public Dock(int sizes, int pictureWidth, int pictureHeight)
         {
             _maxCount = sizes;
-            _places = new Dictionary<int, T>();
+           // _places = new Dictionary<int, T>();
             PictureWidth = pictureWidth;
             PictureHeight = pictureHeight;
         }
