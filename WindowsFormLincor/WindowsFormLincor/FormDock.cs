@@ -12,11 +12,11 @@ namespace WindowsFormLincor
 {
     public partial class FormDock : Form
     {
-        Dock<ILincor,ILincor> dock;
+        Dock<ILincor, ILincor> dock;
         public FormDock()
         {
             InitializeComponent();
-            dock = new Dock<ILincor,ILincor>(20, pictureBoxDock.Width,pictureBoxDock.Height);
+            dock = new Dock<ILincor, ILincor>(20, pictureBoxDock.Width, pictureBoxDock.Height);
             Draw();
         }
         private void Draw()
@@ -71,6 +71,27 @@ namespace WindowsFormLincor
                     pictureBoxTakeLincor.Image = bmp;
                 }
                 Draw();
+            }
+        }
+        private void buttonCompare_Click(object sender, EventArgs e)
+        {
+            if (maskedTextBoxPlace.Text != "")
+            {
+                if (dock < Convert.ToInt32(maskedTextBoxPlace.Text))
+                {
+                    if (dock > Convert.ToInt32(maskedTextBoxPlace.Text))
+                    {
+                        labelPlace.Text = "Свободных мест равно " + maskedTextBoxPlace.Text;
+                    }
+                    else
+                    {
+                        labelPlace.Text = "Свободных мест меньше " + maskedTextBoxPlace.Text;
+                    }
+                }
+                else
+                {
+                    labelPlace.Text = "Свободных мест больше " + maskedTextBoxPlace.Text;
+                }
             }
         }
     }
