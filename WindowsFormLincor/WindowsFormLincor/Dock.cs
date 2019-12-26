@@ -48,6 +48,7 @@ namespace WindowsFormLincor
             {
                 T lin = p._places[index];
                 p._places.Remove(index);
+                p.rTransport.Enqueue(lin);
                 return lin;
             }
             return null;
