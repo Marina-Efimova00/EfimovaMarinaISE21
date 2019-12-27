@@ -135,37 +135,29 @@ namespace WindowsFormLincor
             {
                 return false;
             }
+            var level = dockStages[selectedLevel];
             using (StreamWriter sw = new StreamWriter(filename))
             {
-                sw.WriteLine("Level");
-
                 for (int i = 0; i < countPlaces; i++)
                 {
-                    var lin = dockStages[selectedLevel][i];
+                    var lin = level[i];
                     if (lin != null)
                     {
                         if (lin.GetType().Name == "Lincor")
                         {
-                            sw.Write(i + ":Lincor:");
+                            sw.WriteLine(i + ":ArmorCar:" + lin);
                         }
                         if (lin.GetType().Name == "WarShip")
                         {
-                            sw.Write(i + ":WarShip:");
+                            sw.WriteLine(i + ":WarShip+`:" + lin);
                         }
-                        sw.WriteLine(lin);
                     }
                 }
-
-                sw.WriteLine("Level");
             }
             return true;
         }
         public bool LoadLevelData(string filename, int selectedLevel)
         {
-            if (!File.Exists(filename))
-            {
-                return false;
-            }
             if (selectedLevel < 0 || selectedLevel >= dockStages.Count)
             {
                 return false;
@@ -174,42 +166,36 @@ namespace WindowsFormLincor
             {
                 return false;
             }
+            dockStages[selectedLevel].Clear();
+            ILincor lin = null;
             using (StreamReader sr = new StreamReader(filename))
             {
-                var strs = sr.ReadLine();
-                if (strs.Contains("Level"))
+                string line;
+                while ((line = sr.ReadLine()) != null)
                 {
-                    int counter = -1;
-                    ILincor lin = null;
-                    while (counter < 1)
+                    if (string.IsNullOrEmpty(line))
                     {
-                        strs = sr.ReadLine();
-                        if (strs == "Level")
+                        continue;
+                    }
+                    string[] splitLine = line.Split(':');
+                    if (splitLine.Length > 2)
+                    {
+                        if (splitLine[1] == "ArmorCar")
                         {
-                            counter++;
-                            continue;
+                            lin = new Lincor(splitLine[2]);
                         }
-                        if (string.IsNullOrEmpty(strs))
+                        else
                         {
-                            break;
+                            lin = new WarShip(splitLine[2]);
                         }
-                        if (strs.Split(':')[1] == "Lincor")
+                        if (lin != null)
                         {
-                            lin = new Lincor(strs.Split(':')[2]);
+                            dockStages[selectedLevel][Convert.ToInt32(splitLine[0])] = lin;
                         }
-                        else if (strs.Split(':')[1] == "WarShip")
-                        {
-                            lin = new WarShip(strs.Split(':')[2]);
-                        }
-                        dockStages[selectedLevel][Convert.ToInt32(strs.Split(':')[0])] = lin;
                     }
                 }
-                else
-                {
-                    return false;
-                }
+                return true;
             }
-            return true;
         }
     }
 }

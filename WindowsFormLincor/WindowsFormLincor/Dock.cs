@@ -98,5 +98,9 @@ namespace WindowsFormLincor
                 }
             }
         }
+        public void Clear()
+        {
+            _places.Clear();
+        }
     }
 }
