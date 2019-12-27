@@ -19,14 +19,14 @@ namespace WindowsFormLincor
         public float Weight { private set; get; }
         public Color MainColor { private set; get; }
         public Color DopColor { private set; get; }
-        public DrawTool.LincorCount Count { private get; set; }
+        public LincorCount Count { private get; set; }
         /// Количество иллюменаторов 
         public int CountWindow { private set; get; }
         ///Количество орудий 
         public int Weapons { private set; get; }
         ///Количество кругов  дыма
         public int Smoke { private set; get; }
-        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor, DrawTool.LincorCount lincorCount)
+        public Lincor(int maxSpeed, float weight, Color mainColor, Color dopColor, LincorCount lincorCount)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;

@@ -55,6 +55,7 @@
       <DependentUpon>FormLincor.cs</DependentUpon>
     </Compile>
     <Compile Include="Lincor.cs" />
+    <Compile Include="LincorCount.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormLincor.resx">

@@ -14,12 +14,6 @@ namespace WindowsFormLincor
         public Color DopColor { private set; get; }
         public int x;
         public int y;
-        public enum LincorCount
-        {
-            ONE,
-            TWO,
-            Three,
-        }
         public DrawTool(LincorCount linCount, Color mainColor, Color dopColor, int posX, int posY)
         {
             MainColor = mainColor;
