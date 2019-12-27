@@ -127,6 +127,14 @@ namespace WindowsFormLincor
             {
                 File.Delete(filename);
             }
+            if (selectedLevel < 0 || selectedLevel >= dockStages.Count)
+            {
+                return false;
+            }
+            if (dockStages[selectedLevel] == null)
+            {
+                return false;
+            }
             using (StreamWriter sw = new StreamWriter(filename))
             {
                 sw.WriteLine("Level");
@@ -147,6 +155,7 @@ namespace WindowsFormLincor
                         sw.WriteLine(lin);
                     }
                 }
+
                 sw.WriteLine("Level");
             }
             return true;
@@ -154,6 +163,14 @@ namespace WindowsFormLincor
         public bool LoadLevelData(string filename, int selectedLevel)
         {
             if (!File.Exists(filename))
+            {
+                return false;
+            }
+            if (selectedLevel < 0 || selectedLevel >= dockStages.Count)
+            {
+                return false;
+            }
+            if (!File.Exists(filename) || dockStages[selectedLevel] == null)
             {
                 return false;
             }
