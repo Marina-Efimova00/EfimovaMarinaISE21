@@ -9,35 +9,25 @@ namespace WindowsFormLincor
 {
     class DrawToolSquare : ITool
     {
-        public LincorCount Count { private set; get; }
-        public Color MainColor { private set; get; }
-        public Color DopColor { private set; get; }
-        public int x;
-        public int y;
-        public DrawToolSquare(LincorCount linCount, Color mainColor, Color dopColor, int posX, int posY)
+        public float startPosX;
+        public float startPosY;
+        public DrawToolSquare(float posX, float posY)
         {
-            MainColor = mainColor;
-            DopColor = dopColor;
-            Count = linCount;
-            x = posX;
-            y = posY;
+            startPosX = posX;
+            startPosY = posY;
         }
-        private int CountToInt(LincorCount linCount)
+        public void DrawLin(Graphics g,LincorCount count)
         {
-            return (int)linCount + 1;
-        }
-        public void DrawLin(Graphics g)
-        {
-            SolidBrush blueBrush2 = new SolidBrush(Color.DarkGreen);
+            SolidBrush greenBrush = new SolidBrush(Color.DarkGreen);
             Pen greenPen = new Pen(Color.FromArgb(255, 13, 99, 0), 2);
-            int n = CountToInt(Count);
+            int n = (int)count;
 
-            g.FillRectangle(blueBrush2, x + 60, y + 27, 8, 8);
-            g.DrawLine(greenPen, x + 68, y + 28, x + 77, y + 22);
+            g.FillRectangle(greenBrush, startPosX + 60, startPosY + 27, 8, 8);
+            g.DrawLine(greenPen, startPosX + 68, startPosY + 28, startPosX + 77, startPosY + 22);
             if (n >= 2)
             {
-                g.FillRectangle(blueBrush2, x + 75, y + 27, 8, 8);
-                g.DrawLine(greenPen, x + 83, y + 28, x + 90, y + 22);
+                g.FillRectangle(greenBrush, startPosX + 75, startPosY + 27, 8, 8);
+                g.DrawLine(greenPen, startPosX + 83, startPosY + 28, startPosX + 90, startPosY + 22);
             }
         }
     }

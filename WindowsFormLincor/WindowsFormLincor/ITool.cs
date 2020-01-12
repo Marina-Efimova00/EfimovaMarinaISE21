@@ -9,6 +9,6 @@ namespace WindowsFormLincor
 {
     interface ITool
     {
-        void DrawLin(Graphics g);
+        void DrawLin(Graphics g,LincorCount count);
     }
 }
