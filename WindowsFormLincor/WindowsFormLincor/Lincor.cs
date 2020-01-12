@@ -74,7 +74,7 @@ namespace WindowsFormLincor
         }
         public void DrawLincor(Graphics g)
         {
-            DrawTool dt = new DrawTool(Count, MainColor, DopColor, (int)_startPosX, (int)_startPosY);
+            DrawTool dt = new DrawTool(Count,(int)_startPosX, (int)_startPosY);
             dt.DrawLin(g);
             SolidBrush blueBrush = new SolidBrush(MainColor);
             Point point1 = new Point((int)_startPosX + 10, (int)_startPosY + 35);
