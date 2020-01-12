@@ -31,7 +31,7 @@ namespace WindowsFormLincor
             ColorDialog dialog = new ColorDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var lin = new Lincor(100, 1000, dialog.Color, Color.Gray);
+                var lin = new Lincor(100, 1000, dialog.Color, Color.Gray,LincorCount.TWO);
                 int place = dock + lin;
                 Draw();
             }
@@ -44,7 +44,7 @@ namespace WindowsFormLincor
                 ColorDialog dialogDop = new ColorDialog();
                 if (dialogDop.ShowDialog() == DialogResult.OK)
                 {
-                    var lin = new WarShip(100, 1000, dialog.Color);
+                    var lin = new WarShip(100, 1000, dialog.Color, LincorCount.TWO);
                     int place = dock + lin;
                     Draw();
                 }

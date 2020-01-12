@@ -11,11 +11,15 @@ namespace WindowsFormLincor
     {
         protected const int linWidth = 100;
         protected const int linHeight = 60;
-        public WarShip(int maxSpeed, float weight, Color mainColor)
+        public LincorCount Count { private set; get; }
+        private int toolType;
+        public WarShip(int maxSpeed, float weight, Color mainColor, LincorCount lincorCount)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
+            Count = lincorCount;
+            toolType = new Random().Next(3);
         }
         public override void MoveTransport(Direction direction)
         {
@@ -69,6 +73,23 @@ namespace WindowsFormLincor
             g.FillEllipse(blueBrush3, _startPosX + 35, _startPosY + 37, 5, 5);
             g.FillEllipse(blueBrush3, _startPosX + 55, _startPosY + 37, 5, 5);
             g.FillEllipse(blueBrush3, _startPosX + 70, _startPosY + 37, 5, 5);
+            ITool dt;
+            switch (toolType)
+            {
+                case 0:
+                    dt = new DrawToolSquare((int)_startPosX, (int)_startPosY);
+                    break;
+                case 1:
+                    dt = new DrawToolCircle((int)_startPosX, (int)_startPosY);
+                    break;
+                case 2:
+                    dt = new DrawToolRectangle((int)_startPosX, (int)_startPosY);
+                    break;
+                default:
+                    dt = new DrawToolRectangle((int)_startPosX, (int)_startPosY);
+                    break;
+            }
+            dt.DrawLin(g, Count);
         }
     }
 }
