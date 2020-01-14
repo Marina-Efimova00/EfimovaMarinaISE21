@@ -73,23 +73,23 @@ namespace WindowsFormLincor
             g.FillEllipse(blueBrush3, _startPosX + 35, _startPosY + 37, 5, 5);
             g.FillEllipse(blueBrush3, _startPosX + 55, _startPosY + 37, 5, 5);
             g.FillEllipse(blueBrush3, _startPosX + 70, _startPosY + 37, 5, 5);
-            ITool dt;
+            ITool dtool;
             switch (toolType)
             {
                 case 0:
-                    dt = new DrawToolSquare((int)_startPosX, (int)_startPosY);
+                    dtool = new DrawToolSquare((int)_startPosX, (int)_startPosY);
                     break;
                 case 1:
-                    dt = new DrawToolCircle((int)_startPosX, (int)_startPosY);
+                    dtool = new DrawToolCircle((int)_startPosX, (int)_startPosY);
                     break;
                 case 2:
-                    dt = new DrawToolRectangle((int)_startPosX, (int)_startPosY);
+                    dtool = new DrawToolRectangle((int)_startPosX, (int)_startPosY);
                     break;
                 default:
-                    dt = new DrawToolRectangle((int)_startPosX, (int)_startPosY);
+                    dtool = new DrawToolRectangle((int)_startPosX, (int)_startPosY);
                     break;
             }
-            dt.DrawLin(g, Count);
+            dtool.DrawLin(g, Count);
         }
     }
 }
