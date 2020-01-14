@@ -15,7 +15,7 @@ namespace WindowsFormLincor
         private const int _placeSizeWidth = 210;
         private int PictureHeight { get; set; }
         private const int _placeSizeHeight = 80;
-        private Queue<T> rTransport = new Queue<T>();
+        private Queue<T> removed = new Queue<T>();
         public Dock(int sizes, int pictureWidth, int pictureHeight)
         {
             _maxCount = sizes;
@@ -48,7 +48,7 @@ namespace WindowsFormLincor
             {
                 T lin = p._places[index];
                 p._places.Remove(index);
-                p.rTransport.Enqueue(lin);
+                p.removed.Enqueue(lin);
                 return lin;
             }
             return null;
