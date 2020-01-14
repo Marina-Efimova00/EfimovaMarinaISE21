@@ -45,23 +45,23 @@ namespace WindowsFormLincor
             SolidBrush blueBrush2 = new SolidBrush(DopColor);
             g.DrawLine(greenPen, _startPosX + 68, _startPosY + 28, _startPosX + 77, _startPosY + 22);
             g.DrawLine(greenPen, _startPosX + 83, _startPosY + 28, _startPosX + 90, _startPosY + 22);
-            ITool dt;
+            ITool dtool;
             switch (lincorType)
             {
                 case 0:
-                    dt = new DrawToolSquare(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    dtool = new DrawToolSquare(Count, (int)_startPosX, (int)_startPosY);
                     break;
                 case 1:
-                    dt = new DrawToolCircle(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    dtool = new DrawToolCircle(Count, (int)_startPosX, (int)_startPosY);
                     break;
                 case 2:
-                    dt = new DrawToolRectangle(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    dtool = new DrawToolRectangle(Count, (int)_startPosX, (int)_startPosY);
                     break;
                 default:
-                    dt = new DrawToolRectangle(Count, MainColor, Color.Yellow, (int)_startPosX, (int)_startPosY);
+                    dtool = new DrawToolRectangle(Count,  (int)_startPosX, (int)_startPosY);
                     break;
             }
-            dt.DrawLin(g);
+            dtool.DrawLin(g);
         }
          public void SetDopColor(Color color)
         {
