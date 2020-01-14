@@ -27,7 +27,7 @@ namespace WindowsFormLincor
         private void buttonCreateLincor_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            lin = new Lincor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Black, Color.Gray);
+            lin = new Lincor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Black, Color.Gray, LincorCount.TWO);
             lin.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxLincor.Width,
            pictureBoxLincor.Height);
             Draw();

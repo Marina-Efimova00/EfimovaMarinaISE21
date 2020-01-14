@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Direction.cs" />
+    <Compile Include="DrawTool.cs" />
     <Compile Include="FormLincor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +55,7 @@
       <DependentUpon>FormLincor.cs</DependentUpon>
     </Compile>
     <Compile Include="Lincor.cs" />
+    <Compile Include="LincorCount.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormLincor.resx">
