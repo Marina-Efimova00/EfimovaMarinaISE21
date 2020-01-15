@@ -120,5 +120,40 @@ namespace WindowsFormLincor
                 Draw();
             }
         }
+        private void сохранитьУровеньToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogOneLevel.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (dock.SaveLevelData(saveFileDialogOneLevel.FileName, listBoxLevels.SelectedIndex))
+                {
+                    MessageBox.Show("Сохранение уровня прошло успешно", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void загрузитьУровеньToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogOneLevel.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (dock.LoadLevelData(openFileDialogOneLevel.FileName, listBoxLevels.SelectedIndex))
+                {
+
+                    MessageBox.Show("Загрузка уровня прошла успешно", "Результат", MessageBoxButtons.OK,
+    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузилось", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+                Draw();
+            }
+        }
     }
 }
