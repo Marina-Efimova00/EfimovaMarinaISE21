@@ -12,11 +12,11 @@ namespace WindowsFormLincor
 {
     public partial class FormDock : Form
     {
-        Dock<ILincor> dock;
+        Dock<ILincor, ILincor> dock;
         public FormDock()
         {
             InitializeComponent();
-            dock = new Dock<ILincor>(20, pictureBoxDock.Width,pictureBoxDock.Height);
+            dock = new Dock<ILincor, ILincor>(20, pictureBoxDock.Width, pictureBoxDock.Height);
             Draw();
         }
         private void Draw()
@@ -31,7 +31,7 @@ namespace WindowsFormLincor
             ColorDialog dialog = new ColorDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var lin = new Lincor(100, 1000, dialog.Color, Color.Gray);
+                var lin = new Lincor(100, 1000, dialog.Color, Color.Gray,LincorCount.TWO);
                 int place = dock + lin;
                 Draw();
             }
@@ -44,7 +44,7 @@ namespace WindowsFormLincor
                 ColorDialog dialogDop = new ColorDialog();
                 if (dialogDop.ShowDialog() == DialogResult.OK)
                 {
-                    var lin = new WarShip(100, 1000, dialog.Color);
+                    var lin = new WarShip(100, 1000, dialog.Color, LincorCount.TWO);
                     int place = dock + lin;
                     Draw();
                 }
@@ -71,6 +71,27 @@ namespace WindowsFormLincor
                     pictureBoxTakeLincor.Image = bmp;
                 }
                 Draw();
+            }
+        }
+        private void buttonCompare_Click(object sender, EventArgs e)
+        {
+            if (maskedTextBoxPlace.Text != "")
+            {
+                if (dock < Convert.ToInt32(maskedTextBoxPlace.Text))
+                {
+                    if (dock > Convert.ToInt32(maskedTextBoxPlace.Text))
+                    {
+                        labelPlace.Text = "Свободных мест равно " + maskedTextBoxPlace.Text;
+                    }
+                    else
+                    {
+                        labelPlace.Text = "Свободных мест меньше " + maskedTextBoxPlace.Text;
+                    }
+                }
+                else
+                {
+                    labelPlace.Text = "Свободных мест больше " + maskedTextBoxPlace.Text;
+                }
             }
         }
     }

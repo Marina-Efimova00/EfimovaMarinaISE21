@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace WindowsFormLincor
 {
-    public class Dock<T> where T : class, ILincor
+    public class Dock<T,W> 
+        where T : class, ILincor
+        where W : class, ILincor
     {
         private T[] _places;
         private int PictureWidth { get; set; }
@@ -24,7 +26,7 @@ namespace WindowsFormLincor
                 _places[i] = null;
             }
         }
-        public static int operator +(Dock<T> p, T lin)
+        public static int operator +(Dock<T,W> p, T lin)
         {
             for (int i = 0; i < p._places.Length; i++)
             {
@@ -39,7 +41,7 @@ namespace WindowsFormLincor
             }
             return -1;
         }
-        public static T operator -(Dock<T> p, int index)
+        public static T operator -(Dock<T,W> p, int index)
         {
             if (index < 0 || index > p._places.Length)
             {
@@ -52,6 +54,31 @@ namespace WindowsFormLincor
                 return lin;
             }
             return null;
+        }
+        public static bool operator <(Dock<T, W> p, int compare)
+        {
+            int free = 0;
+            for (int i = 0; i < p._places.Length; i++)
+            {
+                if (p.CheckFreePlace(i))
+                {
+                    free++;
+                }
+            }
+            return free < compare;
+        }
+
+        public static bool operator >(Dock<T, W> p, int compare)
+        {
+            int free = 0;
+            for (int i = 0; i < p._places.Length; i++)
+            {
+                if (p.CheckFreePlace(i))
+                {
+                    free++;
+                }
+            }
+            return free > compare;
         }
         private bool CheckFreePlace(int index)
         {
