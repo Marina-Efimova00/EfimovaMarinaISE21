@@ -30,5 +30,16 @@ namespace WindowsFormLincor
                 return null;
             }
         }
+        public ILincor this[int level, int key]
+        {
+            get
+            {
+                if (level > -1 && level < dockStages.Count)
+                {
+                    return dockStages[level].GetTransportByKey(key);
+                }
+                return null;
+            }
+        }
     }
 }
