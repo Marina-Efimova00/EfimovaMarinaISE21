@@ -145,7 +145,7 @@ namespace WindowsFormLincor
                     {
                         if (lin.GetType().Name == "Lincor")
                         {
-                            sw.WriteLine(i + ":ArmorCar:" + lin);
+                            sw.WriteLine(i + ":Lincor:" + lin);
                         }
                         if (lin.GetType().Name == "WarShip")
                         {
@@ -180,7 +180,7 @@ namespace WindowsFormLincor
                     string[] splitLine = line.Split(':');
                     if (splitLine.Length > 2)
                     {
-                        if (splitLine[1] == "ArmorCar")
+                        if (splitLine[1] == "Lincor")
                         {
                             lin = new Lincor(splitLine[2]);
                         }
